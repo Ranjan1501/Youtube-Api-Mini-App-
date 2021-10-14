@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://kit.fontawesome.com/f0a0d1526b.js" crossorigin="anonymous"></script>
+    <title>Document</title>
+    <style>
+        #videos {
+            display: grid;
+            grid-template-columns: repeat(4,20%);
+           gap: 5%;
+            margin: 4%;
+           
+        }
+       #nav{
+           width: 60%;
+           display: flex;
+           margin: auto;
+       }
+       input{
+           width: 60%;
+           padding:2%;
+       }
+       button{
+           width: 10%;
+           padding:2%;
+       }
+    </style>
+</head>
+
+<body>
+    <nav id="nav">
+
+    
+    <input type="text" id="query" placeholder="Search for a Video" />
+
+    <button   onclick="searchVideos()"> <i class="fas fa-search"></i></button>
+</nav>
+   
+    <div id="videos">
+        <!-- <iframe width="560" height="315" src="https://www.youtube.com/embed/4M3tiUKuTuA" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe> -->
+
+        <!-- first check embed video working or not  -->
+    </div>
+
+</body>
+
+</html>
+
+<script>
+    //API youtube API-3 AIzaSyA3zMmuLW9n9cqAsHAt4OS6Fk9ATj5cnHg
+
+    //    AIzaSyDn3oRtrEGpUB-WIpvGyTE5WhI9o0zpj3I
+
+    // https://youtube.googleapis.com/youtube/v3/search?q=csk&type=video&key=AIzaSyA3zMmuLW9n9cqAsHAt4OS6Fk9ATj5cnHg
+
+    // reuest promise for data
+
+    let videos = document.getElementById("videos"); // making parent div 
+    async function searchVideos() {
+
+        let query=document.getElementById("query").value; // make dynamic input search 
+        // fetch data 
+        let res = await fetch(`https://youtube.googleapis.com/youtube/v3/search?q=${query}&type=video&key=AIzaSyDn3oRtrEGpUB-WIpvGyTE5WhI9o0zpj3I&maxResults=12`);
+        // convert to json as it a strem data have to wait so await 
+
+        let data = await res.json();
+        console.log("data:", data);
+        appendVideos(data.items);  // we are excecuting search data by videoID 
+        // argument would be complete array of object 
+    }
+
+    searchVideos();
+
+    // data promise done 
+    //  got the videid
+    // showcase on the web page
+    //parameter- data.items where data is response in json format array of object mean complte array of data 
+
+    function appendVideos(video_data) {
+        videos.innerHTML=null;
+        video_data.forEach(({ id: { videoId } }) => {
+
+            // console.log("video:", video.id.videoID); // use destruturing  instead of this
+
+            let div = document.createElement("div");
+            // embed video
+            div.innerHTML = `<iframe width="250" height="200" src="https://www.youtube.com/embed/${videoId}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe> `
+            // to make dynamic use template literal close  iframe tag becoz we are emding dynamic data 
+            div.style.marginTop="20px"
+            videos.append(div);
+        });
+
+    }
+
+</script>
