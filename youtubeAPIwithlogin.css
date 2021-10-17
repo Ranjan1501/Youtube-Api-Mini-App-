@@ -1,0 +1,59 @@
+body {
+    margin: 0;
+    width: 100%;
+    background-color: aquamarine;
+    margin: auto;
+}
+
+#videos {
+    width: 80%;
+    display: grid;
+    grid-template-columns: repeat(4, 20%);
+    gap: 5%;
+    margin: auto;
+}
+
+#nav {
+    width: 60%;
+    display: flex;
+    margin: auto;
+}
+
+#nav input {
+    width: 60%;
+    padding: 2%;
+}
+
+#nav button {
+    width: 10%;
+    padding: 2%;
+}
+
+#register {
+    width: 100%;
+    display: flex;
+    margin-top: 0%;
+}
+
+#signup {
+    width: 40%;
+    display: grid;
+    grid-template-columns: 30%;
+    grid-template-rows: repeat(6, auto);
+    gap: 5%;
+    padding: 3%;
+    margin-top: 0%;
+    justify-content: center;
+}
+
+#login {
+    width: 40%;
+    display: grid;
+    grid-template-columns: 30%;
+    grid-template-rows: repeat(2, auto);
+    gap: 5%;
+    padding: 3%;
+    margin-top: 0%;
+    justify-content: left-top;
+    align-items: top;
+}
